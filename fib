@@ -1,0 +1,29 @@
+def fib
+move 1 r2
+eq r1 r2 r3
+if_return r3 1
+move 2 r2
+eq r1 r2 r3
+if_return r3 2
+var a 0
+var b 0
+move 1 r2
+dec r1 r2 a
+move 2 r2
+dec r1 r2 b
+move a r1
+call fib
+move r3 a
+move b r1
+call fib
+move r3 b
+sum a b r3
+return
+enddef
+def main 0
+print Enter number:
+read r1
+call fib
+print_reg r3
+exit
+enddef
