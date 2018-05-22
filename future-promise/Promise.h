@@ -22,7 +22,9 @@ public:
         op->set_exc(); 
     }
 
-    Future<T> res() { return Future<T>(op); }
+    Future<T> res() { 
+        return Future<T>(op); 
+    }
 
     std::shared_ptr<Delayed<T>> op;
 };

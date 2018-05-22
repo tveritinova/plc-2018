@@ -17,8 +17,8 @@ public:
 	}
 
     template<typename R>
-    Future<R> then(std::function<R(const T&)> process){
-    	return Future<R>(std::make_shared<ThenDelayed<T,R>>(*this, process));
+    Future<R> then(std::function<R(const T&)> worker){
+    	return Future<R>(std::make_shared<ThenDelayed<T,R>>(*this, worker));
     }
 
     std::shared_ptr<Delayed<T>> op;

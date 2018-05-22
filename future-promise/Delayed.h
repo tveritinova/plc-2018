@@ -83,7 +83,7 @@ public:
 
     ThenDelayed(Future<T> future, std::function<R(const T&)> worker):
         future(future),
-        processor(worker) {}
+        worker(worker) {}
 
     virtual void wait() override { return; }
 
@@ -98,11 +98,11 @@ public:
             return this->value.get();
         }
 
-        this->value = std::move(std::make_unique<R>(processor(future.get())));
+        this->value = std::move(std::make_unique<R>(worker(future.get())));
         this->cv.notify_all();
         return this->value.get();
     }
 
     Future<T> future;
-    std::function<R(const T&)> processor;
+    std::function<R(const T&)> worker;
 };
